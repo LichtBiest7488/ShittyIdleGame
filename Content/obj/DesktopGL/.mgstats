@@ -1,0 +1,4 @@
+Source File,Dest File,Processor Type,Content Type,Source File Size,Dest File Size,Build Seconds
+"C:/Users/Licht/Desktop/ShittyIdleGame/Content/DefaultFont.spritefont","C:/Users/Licht/Desktop/ShittyIdleGame/Content/bin/DesktopGL/DefaultFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,37922,0,1032728
+"C:/Users/Licht/Desktop/ShittyIdleGame/Content/Dollar.jpg","C:/Users/Licht/Desktop/ShittyIdleGame/Content/bin/DesktopGL/Dollar.xnb","TextureProcessor","Texture2DContent",23160,504421,0,0249637
+"C:/Users/Licht/Desktop/ShittyIdleGame/Content/ScoreFont.spritefont","C:/Users/Licht/Desktop/ShittyIdleGame/Content/bin/DesktopGL/ScoreFont.xnb","FontDescriptionProcessor","SpriteFontContent",2068,267298,0,0223063

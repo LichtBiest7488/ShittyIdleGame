@@ -1,0 +1,77 @@
+{
+  "Dollars": 30453.974877943296,
+  "Magic": 0,
+  "LastSavedTime": "2025-01-20T17:57:55.9010689+01:00",
+  "BuildingDatas": [
+    {
+      "Name": "Bad Money Printer",
+      "PurchasedCount": 10,
+      "boughtUpgrades": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "Name": "Okay Money Printer",
+      "PurchasedCount": 11,
+      "boughtUpgrades": [
+        1,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "Name": "Money Printer",
+      "PurchasedCount": 7,
+      "boughtUpgrades": [
+        0,
+        0,
+        0,
+        0
+      ]
+    },
+    {
+      "Name": "Good Money Printer",
+      "PurchasedCount": 0,
+      "boughtUpgrades": [
+        0,
+        0,
+        0,
+        0
+      ]
+    }
+  ],
+  "MagicBuildingDatas": [
+    {
+      "Name": "BloodAltar",
+      "PurchasedCount": 0,
+      "boughtUpgrades": [
+        0,
+        0
+      ]
+    }
+  ],
+  "DollarUpgrades": [
+    1,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0,
+    0
+  ],
+  "BloodPactDatas": [
+    {
+      "Name": "Imp",
+      "PurchasedCount": 0
+    }
+  ]
+}
