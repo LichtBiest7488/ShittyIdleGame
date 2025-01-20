@@ -17,9 +17,44 @@ public class SaveData
     public List<BuildingData> MagicBuildingDatas { get; set; } = new List<BuildingData>();
     public List<int> DollarUpgrades  { get; set; } = new List<int>();
     public List<BloodPactData> BloodPactDatas { get; set; } = new List<BloodPactData>();
+    public List<IncantationData> IncantationDatas { get; set; } = new List<IncantationData>();
+    public SaveData(){
 
-    public SaveData()
+    } 
+    
+}
+
+
+public class BloodPactData
+{
+    public string Name { get; set; }
+    public int PurchasedCount { get; set; }
+//    public double cost;
+
+    public BloodPactData()
     {
+    }
+}
+public class IncantationData
+{
+    public string Name { get; set; }
+    public int PurchasedCount { get; set; }
+//    public double cost;
 
+    public IncantationData()
+    {
+    }
+}
+
+public class BuildingData
+{
+    public string Name { get; set; }
+    public int PurchasedCount { get; set; }
+    public List<int> boughtUpgrades{ get; set;}
+//    public double cost;
+
+    public BuildingData()
+    {
+        boughtUpgrades = new List<int>();
     }
 }

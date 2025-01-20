@@ -1,44 +1,44 @@
 {
-  "Dollars": 30453.974877943296,
-  "Magic": 0,
-  "LastSavedTime": "2025-01-20T17:57:55.9010689+01:00",
+  "Dollars": 5818875266.977722,
+  "Magic": 9.116684900000017,
+  "LastSavedTime": "2025-01-20T22:47:22.0799615+01:00",
   "BuildingDatas": [
     {
       "Name": "Bad Money Printer",
-      "PurchasedCount": 10,
+      "PurchasedCount": 150,
       "boughtUpgrades": [
         1,
-        0,
-        0,
-        0
+        1,
+        1,
+        1
       ]
     },
     {
       "Name": "Okay Money Printer",
-      "PurchasedCount": 11,
+      "PurchasedCount": 150,
       "boughtUpgrades": [
         1,
-        0,
-        0,
-        0
+        1,
+        1,
+        1
       ]
     },
     {
       "Name": "Money Printer",
-      "PurchasedCount": 7,
+      "PurchasedCount": 50,
       "boughtUpgrades": [
-        0,
-        0,
+        1,
+        1,
         0,
         0
       ]
     },
     {
       "Name": "Good Money Printer",
-      "PurchasedCount": 0,
+      "PurchasedCount": 56,
       "boughtUpgrades": [
-        0,
-        0,
+        1,
+        1,
         0,
         0
       ]
@@ -47,7 +47,7 @@
   "MagicBuildingDatas": [
     {
       "Name": "BloodAltar",
-      "PurchasedCount": 0,
+      "PurchasedCount": 5,
       "boughtUpgrades": [
         0,
         0
@@ -56,22 +56,44 @@
   ],
   "DollarUpgrades": [
     1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
+    1,
     0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
-    0,
+    1,
+    1,
     0
   ],
   "BloodPactDatas": [
     {
       "Name": "Imp",
+      "PurchasedCount": 2
+    },
+    {
+      "Name": "Lesser Demon",
+      "PurchasedCount": 6
+    },
+    {
+      "Name": "Demon",
       "PurchasedCount": 0
+    },
+    {
+      "Name": "Greater Demon",
+      "PurchasedCount": 0
+    }
+  ],
+  "IncantationDatas": [
+    {
+      "Name": "Mental Training",
+      "PurchasedCount": 20
+    },
+    {
+      "Name": "Lesser Demon efficiency",
+      "PurchasedCount": 1
     }
   ]
 }

@@ -16,7 +16,7 @@ namespace ShittyIdleGame
 
             _upgrades.Add(new Upgrade("Click upgrade 1","x2", unlock: 10, cost: G._buildings[0].GetBaseCost()*10, 2, this));//unlocks at MoneyPrinter1 level 10
             _upgrades.Add(new Upgrade("Click upgrade 2","x2", unlock: 50, G._buildings[0].GetBaseCost()*100, 2, this));
-            _upgrades.Add(new Upgrade("Click upgrade 3","x2", unlock: 100, G._buildings[0].GetBaseCost()*1000, 2, this));
+            _upgrades.Add(new Upgrade("Click upgrade 3","x2", unlock: 100, G._buildings[0].GetBaseCost()*1000, 2, this));// level 100
 
             _upgrades.Add(new Upgrade("Click upgrade 4","x2", unlock: 10, G._buildings[1].GetBaseCost()*10, 2, this));//unlocks at MoneyPrinter2 level 10
             _upgrades.Add(new Upgrade("Click upgrade 5","x2", unlock: 50, G._buildings[1].GetBaseCost()*100, 2, this));

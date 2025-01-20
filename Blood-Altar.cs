@@ -15,7 +15,7 @@ namespace ShittyIdleGame
     public class BloodAltar : Building
     {   
         public override double Cost => (float)(BaseCost * System.Math.Pow(5.0, PurchasedCount)); // Scale cost by x5 per purchase
-        public BloodAltar(int _buildingNumber) : base("BloodAltar", 1.3*System.Math.Pow(10, 7), 0.2, MakeMagicRectangle(_buildingNumber)) {
+        public BloodAltar(int _buildingNumber) : base("BloodAltar", 6.66*System.Math.Pow(10, 6), 0.2, MakeMagicRectangle(_buildingNumber)) {
             _upgrades.Add(new Upgrade("1. BloodAltar upgrade","multiplies cps x2", 10, BaseCost*10, 2, this));//unlocks at 10, costs 200, multiplies by 2
             _upgrades.Add(new Upgrade("2.","x2",50,BaseCost*100,2, this));
             foreach(Upgrade upgrade in _upgrades){

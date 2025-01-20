@@ -15,12 +15,12 @@ public class Game1 : Game
     private SpriteBatch _spriteBatch;
     private SpriteFont _font;
     private SpriteFont _ScoreFont;
-    
-    //Button stuff
 
     private Texture2D _buttonTexture;
     
     private Dollar dollar;
+
+    private bool DebugMode = true;
     
 
     private enum UIState
@@ -186,9 +186,41 @@ public class Game1 : Game
                     G._bloodPacts[0].PurchasedCount=bloodPactData.PurchasedCount;
                     G._bloodPacts[0].UpdateMyBuilding();
                     break;
+                    case "Lesser Demon":
+                    G._bloodPacts.Add(new Demon2(G._bloodPacts.Count));
+                    G._bloodPacts[1].PurchasedCount=bloodPactData.PurchasedCount;
+                    G._bloodPacts[1].UpdateMyBuilding();
+                    break;
+                    case "Demon":
+                    G._bloodPacts.Add(new Demon3(G._bloodPacts.Count));
+                    G._bloodPacts[2].PurchasedCount=bloodPactData.PurchasedCount;
+                    G._bloodPacts[2].UpdateMyBuilding();
+                    break;
+                    case "Greater Demon":
+                    G._bloodPacts.Add(new Demon4(G._bloodPacts.Count));
+                    G._bloodPacts[3].PurchasedCount=bloodPactData.PurchasedCount;
+                    G._bloodPacts[3].UpdateMyBuilding();
+                    break;
                 }
-                
             }
+            //Initialize Incantations
+            foreach(IncantationData incantationData in saveData.IncantationDatas){
+                String name = incantationData.Name;
+                switch(name){
+                    case "Mental Training":
+                    G._incantations.Add(new Incantation1(G._incantations.Count));
+                    G._incantations[0].SetPurchasedCount(incantationData.PurchasedCount);
+                    break;
+                    case "Lesser Demon efficiency":
+                    G._incantations.Add(new Incantation2(G._incantations.Count));
+                    G._incantations[1].SetPurchasedCount(incantationData.PurchasedCount);
+                    break;
+                }
+            }
+            if(G._incantations.Count==1){
+                G._incantations.Add(new Incantation2(G._incantations.Count));
+            }
+            
             //calculate D/s
             G._dps=0;
             foreach(Building building in G._buildings){
@@ -202,7 +234,10 @@ public class Game1 : Game
             System.Console.WriteLine($"new Dollars: {G.Dollars.ToString("E2")}");
         }else
         {//make new Game
-            G.Dollars=10;
+            if(DebugMode)
+                G.Dollars=100000000;
+            else
+                G.Dollars=10;
             G.Magic=0;
             G._buildings.Add(new MoneyPrinter1(G._buildings.Count));
             G._buildings.Add(new MoneyPrinter2(G._buildings.Count));
@@ -210,6 +245,10 @@ public class Game1 : Game
             G._buildings.Add(new MoneyPrinter4(G._buildings.Count));
             G._magicBuildings.Add(new BloodAltar(G._magicBuildings.Count));
             G._bloodPacts.Add(new Demon1(G._bloodPacts.Count));
+            G._bloodPacts.Add(new Demon2(G._bloodPacts.Count));
+            G._bloodPacts.Add(new Demon3(G._bloodPacts.Count));
+            G._bloodPacts.Add(new Demon4(G._bloodPacts.Count));
+            G._incantations.Add(new Incantation1(G._incantations.Count)); 
             dollar = new Dollar();
         }
         base.Initialize();
@@ -268,6 +307,14 @@ public class Game1 : Game
                 PurchasedCount = bloodPact.PurchasedCount
             });
         }
+        List<IncantationData> incantationDatas = new List<IncantationData>();
+        foreach(Incantation incantation in G._incantations){
+            incantationDatas.Add(new IncantationData{
+                Name = incantation.Name,
+                PurchasedCount = incantation.PurchasedCount
+            });
+        }
+
         SaveData savedata =new SaveData{
             Dollars= G.Dollars,
             BuildingDatas = buildingDatas,
@@ -275,7 +322,8 @@ public class Game1 : Game
             LastSavedTime = DateTime.Now,
             Magic = G.Magic,
             DollarUpgrades = dollar.GetBoughtUpgrades(),
-            BloodPactDatas = blooPactDatas
+            BloodPactDatas = blooPactDatas,
+            IncantationDatas = incantationDatas
         };
         
         SaveManager.Save(savedata);
@@ -403,9 +451,15 @@ public class Game1 : Game
             }
             if(_currentUIState == UIState.Magic){
                 foreach(BloodPact bloodPact in G._bloodPacts){
-                    if(bloodPact.rectangle.Contains(mousePos) && G.Magic>= bloodPact.BaseCost){
-                        G.Magic-=bloodPact.BaseCost;
+                    if(bloodPact.rectangle.Contains(mousePos) && G.Magic>= bloodPact.Cost && bloodPact.PurchasedCount<bloodPact.PurchaseCap){
+                        //G.Magic-=bloodPact.BaseCost;
                         bloodPact.Purchase();
+                    }
+                }
+                foreach(Incantation incantation in G._incantations){
+                    if(incantation.Pos.Contains(mousePos) && G.Magic>= incantation.BaseCost){
+                        G.Magic-=incantation.BaseCost;
+                        incantation.Purchase();
                     }
                 }
             }
@@ -633,6 +687,30 @@ public class Game1 : Game
         for (int i = 0; i < G._bloodPacts.Count; i++)
         {
             G._bloodPacts[i].Draw(_spriteBatch, _font, _buttonTexture);
+        }
+
+        //Setup Magic Area
+        //_spriteBatch.Draw(_buttonTexture, G._magicBuildingArea, Color.Gray);
+        borderTexture = new Texture2D(GraphicsDevice, 1, 1);
+        borderTexture.SetData(new[] { Color.Black });
+        //_spriteBatch.Draw(borderTexture, new Rectangle(G._buildingsArea.X, G._magicBuildingArea.Y-3, G.screenWidth/4, 3), Color.Black); //Black Line between Areas
+
+        //border around head of Magic building area
+        _spriteBatch.Draw(borderTexture, new Rectangle(G._magicBuildingArea.X, G._magicBuildingArea.Y, G.buildingsAreaWidth, borderThickness), Color.Black); // Top border
+        _spriteBatch.Draw(borderTexture, new Rectangle(G._magicBuildingArea.X, G._magicBuildingArea.Y, borderThickness, G._buildingButtonHeight), Color.Black); // Left border
+        _spriteBatch.Draw(borderTexture, new Rectangle(G._magicBuildingArea.X + G.buildingsAreaWidth - borderThickness, G._magicBuildingArea.Y, borderThickness, G._buildingButtonHeight), Color.Black); // Right border
+        _spriteBatch.Draw(borderTexture, new Rectangle(G._magicBuildingArea.X, G._magicBuildingArea.Y + G._buildingButtonHeight - borderThickness, G.buildingsAreaWidth, borderThickness), Color.Black); // Bottom border
+
+        // Center the label on the button
+        textSize = _font.MeasureString("Incantations");
+        textPosition = new Vector2(
+            G._magicBuildingArea.X + (G.buildingsAreaWidth - textSize.X) / 2,
+            G._magicBuildingArea.Y + (G._buildingButtonHeight - textSize.Y) / 2
+        );
+        _spriteBatch.DrawString(_font, "Incantations", textPosition, Color.Black);
+        //Draw each Incantation
+        for(int i=0; i< G._incantations.Count;i++){
+            G._incantations[i].Draw(_spriteBatch, _font, _buttonTexture);
         }
     }
 

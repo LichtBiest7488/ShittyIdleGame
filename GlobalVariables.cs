@@ -50,5 +50,6 @@ namespace ShittyIdleGame
         public static List<int> _boughtGenericUpgrades =  new List<int>();
         public static List<Upgrade> _boughtUpgrades = new List<Upgrade>();
         public static List<BloodPact> _bloodPacts = new List<BloodPact>();
+        public static List<Incantation> _incantations = new List<Incantation>();
     }
 }

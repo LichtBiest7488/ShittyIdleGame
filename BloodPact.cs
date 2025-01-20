@@ -10,7 +10,7 @@ namespace ShittyIdleGame
         public string Name { get; }
         public string Description { get; }
         public double BaseCost;
-        public double Cost { get; }
+        public virtual double Cost { get; }
         public double BaseMultiplier;
         //public double CpsMultiplier { get; }
         public virtual double ProductionMultiplier => (double) System.Math.Pow(BaseMultiplier, PurchasedCount);
@@ -19,6 +19,8 @@ namespace ShittyIdleGame
         public Rectangle rectangle;
         public int Number;
         public int MyBuilding;
+        public int PurchaseCap;
+        public int sacrificeAmount; 
         public BloodPact(string name, string description, double Basecost, double baseMultiplier, Rectangle Rectangle, int myBuilding)
         {
             rectangle = Rectangle;
@@ -28,12 +30,30 @@ namespace ShittyIdleGame
             BaseMultiplier = baseMultiplier;
             PurchasedCount=0;
             MyBuilding = myBuilding;
+            PurchaseCap =25;
         }
         public BloodPact(){
         }
-        public void Purchase()
-        {
+        public virtual void Purchase()
+        {   
+            G.Magic-=BaseCost;
             PurchasedCount++;
+            UpdateMyBuilding();
+        }
+        public virtual void Purchase(int amount){
+            PurchasedCount+=amount;
+            UpdateMyBuilding();
+        }
+        public void SetPurchasedCount(int amount){
+            PurchasedCount=amount;
+            UpdateMyBuilding();
+        }
+        public virtual void Sell(){
+            PurchasedCount--;
+            UpdateMyBuilding();
+        }
+        public virtual void Sell(int amount){
+            PurchasedCount-=amount;
             UpdateMyBuilding();
         }
         public void UpdateMyBuilding(){
@@ -71,7 +91,7 @@ namespace ShittyIdleGame
             string FortmattedBoost = (ProductionMultiplier-1)*100 > 999 ? ((ProductionMultiplier-1)*100).ToString("E2") : ((ProductionMultiplier-1)*100).ToString("F2");
             spriteBatch.DrawString(
                 font,
-                $"Purchased: {PurchasedCount} - Boosting by: {FortmattedBoost}%",
+                $"Purchased: {PurchasedCount} / {PurchaseCap} - Boosting by: {FortmattedBoost}%",
                 new Vector2(rectangle.X + 5, rectangle.Y + 45),
                 Color.Black
             );

@@ -7,6 +7,7 @@ namespace ShittyIdleGame
 {
     public class Demon1 : BloodPact
     {
+        public override double Cost => BaseCost;
         public Demon1(int _buildingNumber) : base("Imp","Summon an imp to boost MoneyPrinter1",Basecost: 10, baseMultiplier: 1.5, MakeRectangle(_buildingNumber), _buildingNumber) {
         }
     }
