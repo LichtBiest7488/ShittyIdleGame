@@ -135,6 +135,9 @@ public class Game1 : Game
                     case "BloodAltar":
                     G._magicBuildings.Add(new BloodAltar(G._magicBuildings.Count));
                     break;
+                    case "Human Sacrifice":
+                    G._magicBuildings.Add(new Sacrifice(G._magicBuildings.Count));
+                    break;
                 }
                 G._magicBuildings[i].PurchasedCount=buildingData.PurchasedCount;
                 int j=0;
@@ -217,8 +220,8 @@ public class Game1 : Game
                     break;
                 }
             }
-            if(G._incantations.Count==1){
-                G._incantations.Add(new Incantation2(G._incantations.Count));
+            if(G._magicBuildings.Count==1){
+                G._magicBuildings.Add(new Sacrifice(G._magicBuildings.Count));
             }
             
             //calculate D/s
@@ -244,6 +247,7 @@ public class Game1 : Game
             G._buildings.Add(new MoneyPrinter3(G._buildings.Count));
             G._buildings.Add(new MoneyPrinter4(G._buildings.Count));
             G._magicBuildings.Add(new BloodAltar(G._magicBuildings.Count));
+            G._magicBuildings.Add(new Sacrifice(G._magicBuildings.Count));
             G._bloodPacts.Add(new Demon1(G._bloodPacts.Count));
             G._bloodPacts.Add(new Demon2(G._bloodPacts.Count));
             G._bloodPacts.Add(new Demon3(G._bloodPacts.Count));
@@ -336,16 +340,6 @@ public class Game1 : Game
     {
         if (GamePad.GetState(PlayerIndex.One).Buttons.Back == ButtonState.Pressed || Keyboard.GetState().IsKeyDown(Keys.Escape))
             Exit();
-
-        //System.Console.WriteLine($"BloodMultiplier: {G._buildings[0].BloodMultiplier} - UpgradeMult: {G._buildings[0].UpgradeMultiplier}");
-
-        /*
-        string upgradeNames = "";
-        foreach(Upgrade upgrade in G._availableUpgrades){
-            upgradeNames+= (upgrade.ToString()+", ");
-        }
-        System.Console.WriteLine($"Number of available ugrades: {G._availableUpgrades.Count} - Upgrades: {upgradeNames}");
-        */
 
         //Get MouseState
         MouseState currentMouseState = Mouse.GetState();

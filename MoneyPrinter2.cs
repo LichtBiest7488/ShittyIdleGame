@@ -3,7 +3,7 @@ using G = ShittyIdleGame.GlobalVariables;
 using System;
 namespace ShittyIdleGame
 {
-    
+    //test
 
     public class MoneyPrinter2 : Building
     {
